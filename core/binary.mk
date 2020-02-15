@@ -38,17 +38,23 @@ my_soong_problems :=
 # on the generated_kernel_headers header library
 ifneq (,$(findstring $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include,$(LOCAL_C_INCLUDES)))
   LOCAL_C_INCLUDES := $(patsubst $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include,,$(LOCAL_C_INCLUDES))
+ifeq ($(LOCAL_KERNEL),)
   LOCAL_HEADER_LIBRARIES += generated_kernel_headers
+endif
 endif
 ifneq (,$(findstring $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/techpack/audio/include,$(LOCAL_C_INCLUDES)))
   LOCAL_C_INCLUDES := $(patsubst $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/techpack/audio/include,,$(LOCAL_C_INCLUDES))
+ifeq ($(LOCAL_KERNEL),)
   LOCAL_HEADER_LIBRARIES += generated_kernel_headers
+endif
 endif
 
 # Some qcom binaries use this weird -isystem include...
 ifneq (,$(findstring $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include,$(LOCAL_CFLAGS)))
   LOCAL_CFLAGS := $(patsubst -isystem $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include,,$(LOCAL_CFLAGS))
+ifeq ($(LOCAL_KERNEL),)
   LOCAL_HEADER_LIBRARIES += generated_kernel_headers
+endif
 endif
 
 # Remove KERNEL_OBJ/usr from any LOCAL_ADDITIONAL_DEPENDENCIES, we will
