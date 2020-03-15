@@ -1696,7 +1696,7 @@ else if get_stage("%(bcb_dev)s") != "3/3" then
 
   device_specific.IncrementalOTA_VerifyBegin()
 
-  WriteFingerprintAssertion(script, target_info, source_info)
+  # WriteFingerprintAssertion(script, target_info, source_info)
 
   # Check the required cache size (i.e. stashed blocks).
   size = []
